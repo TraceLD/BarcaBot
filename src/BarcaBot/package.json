@@ -1,0 +1,48 @@
+{
+  "name": "barcabot",
+  "version": "3.0.0-dev",
+  "description": "FC Barcelona themed Discord bot.",
+  "main": "index.js",
+  "scripts": {
+    "publish": "rimraf dist && tsc",
+    "dev": "tsnd --respawn index.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TraceLD/BarcaBot.git"
+  },
+  "keywords": [
+    "bot",
+    "discord",
+    "discord-bot",
+    "discord.js",
+    "fcbarcelona",
+    "fcb",
+    "barca",
+    "barcabot"
+  ],
+  "author": "TraceLD",
+  "license": "AGPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/TraceLD/BarcaBot/issues"
+  },
+  "homepage": "https://github.com/TraceLD/BarcaBot#readme",
+  "dependencies": {
+    "@types/node": "^16.6.0",
+    "cross-env": "^7.0.3",
+    "discord.js": "^13.0.1",
+    "dot-env": "0.0.1"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^4.29.1",
+    "@typescript-eslint/parser": "^4.29.1",
+    "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^3.4.0",
+    "prettier": "^2.3.2",
+    "rimraf": "^3.0.2",
+    "ts-node-dev": "^1.1.8",
+    "typescript": "^4.3.5"
+  }
+}
