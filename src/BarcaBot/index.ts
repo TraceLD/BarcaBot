@@ -1,26 +1,15 @@
-import fs from "fs";
-import { Client, Collection, Intents, Interaction } from "discord.js";
-import { CommandsClient } from "./barcabot";
-import { Command, registerCommands } from "./commandsFramework";
-import { token } from "./config.json";
+import { Intents, Interaction } from "discord.js";
+import { SlashCommandsClient } from "./client";
+import { Command } from "./commandsFramework";
+import { token, clientId, developmentGuildId } from "./config.json";
 
 console.log(`Environment: ${process.env.NODE_ENV}`);
 
-const client: CommandsClient = new Client({
+const client: SlashCommandsClient = new SlashCommandsClient({
   intents: [Intents.FLAGS.GUILDS],
 });
 
-// set up commands;
-client.commands = new Collection<string, Command>();
-
-const commandFiles: string[] = fs.readdirSync("./commands").filter((file) => file.endsWith(".ts"));
-for (const file of commandFiles) {
-  // eslint-disable-next-line @typescript-eslint/no-var-requires
-  const command: Command = require(`./commands/${file}`).default;
-  client.commands.set(command.data.name, command);
-}
-
-registerCommands(client.commands);
+client.setUpCommands(token, clientId, developmentGuildId);
 
 client.once("ready", () => {
   console.log("Ready!");
@@ -32,7 +21,12 @@ client.on("interactionCreate", async (interaction: Interaction) => {
   }
 
   try {
-    const command: Command = client.commands.get(interaction.commandName);
+    const command: Command | undefined = client.commands.get(interaction.commandName);
+
+    if (command === undefined) {
+      return interaction.reply({ content: "Could not find a matching command." });
+    }
+
     await command.execute(interaction);
   } catch (error) {
     console.error(error);
