@@ -1,36 +1,51 @@
+import logger from "./logger";
 import { Intents, Interaction } from "discord.js";
 import { SlashCommandsClient } from "./client";
-import { Command } from "./commandsFramework";
+import { SlashCommand } from "./slashCommand";
 import { token, clientId, developmentGuildId } from "./config.json";
 
-console.log(`Environment: ${process.env.NODE_ENV}`);
+logger.log({ level: "info", message: "Environment", environment: process.env.NODE_ENV });
 
-const client: SlashCommandsClient = new SlashCommandsClient({
+const client = new SlashCommandsClient({
   intents: [Intents.FLAGS.GUILDS],
 });
 
 client.setUpCommands(token, clientId, developmentGuildId);
 
 client.once("ready", () => {
-  console.log("Ready!");
+  logger.info("Bot ready!");
 });
 
 client.on("interactionCreate", async (interaction: Interaction) => {
-  if (!interaction.isCommand() || client.commands === undefined || !client.commands.has(interaction.commandName)) {
+  if (
+    !interaction.isCommand() ||
+    client.commands === undefined ||
+    !client.commands.has(interaction.commandName)
+  ) {
     return;
   }
 
+  const scopedLogger = logger.child({
+    interactionId: interaction.id,
+    commandId: interaction.commandId,
+    commandName: interaction.commandName,
+  });
+
   try {
-    const command: Command | undefined = client.commands.get(interaction.commandName);
+    const command: SlashCommand | undefined = client.commands.get(interaction.commandName);
 
     if (command === undefined) {
+      scopedLogger.error("Could not find a matching command");
       return interaction.reply({ content: "Could not find a matching command." });
     }
 
     await command.execute(interaction);
   } catch (error) {
-    console.error(error);
-    return interaction.reply({ content: "There was an error while executing this command!", ephemeral: true });
+    scopedLogger.error(error);
+
+    return interaction.reply({
+      content: "There was an error while executing this command!",
+    });
   }
 });
 

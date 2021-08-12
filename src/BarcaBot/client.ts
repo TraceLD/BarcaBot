@@ -1,19 +1,21 @@
 import fs from "fs";
 import { Client, ClientOptions, Collection } from "discord.js";
-import { Command } from "./commandsFramework";
+import { SlashCommand } from "./slashCommand";
 import { REST } from "@discordjs/rest";
 import { APIApplicationCommandOption, Routes } from "discord-api-types/v9";
 
 export class SlashCommandsClient extends Client<boolean> {
-  commands: Collection<string, Command>;
+  commands: Collection<string, SlashCommand>;
 
   constructor(options: ClientOptions) {
     super(options);
-    this.commands = new Collection<string, Command>();
+    this.commands = new Collection<string, SlashCommand>();
   }
 
   setUpCommands(token: string, clientId: string, developmentGuildId: string): void {
-    const commandFiles: string[] = fs.readdirSync("./commands").filter((file) => file.endsWith(".ts"));
+    const commandFiles: string[] = fs
+      .readdirSync("./commands")
+      .filter((file) => file.endsWith(".ts"));
     let commandsJson: {
       name: string;
       description: string;
@@ -22,7 +24,7 @@ export class SlashCommandsClient extends Client<boolean> {
 
     for (const file of commandFiles) {
       // eslint-disable-next-line @typescript-eslint/no-var-requires
-      const command: Command = require(`./commands/${file}`).default;
+      const command: SlashCommand = require(`./commands/${file}`).default;
 
       this.commands.set(command.data.name, command);
       commandsJson = [...commandsJson, command.data.toJSON()];
@@ -36,7 +38,9 @@ export class SlashCommandsClient extends Client<boolean> {
         console.log("Started refreshing slash commands.");
 
         if (process.env.NODE_ENV === "DEVELOPMENT") {
-          await rest.put(Routes.applicationGuildCommands(clientId, developmentGuildId), { body: commandsJson });
+          await rest.put(Routes.applicationGuildCommands(clientId, developmentGuildId), {
+            body: commandsJson,
+          });
 
           console.log(`Successfully reloaded ${developmentGuildId} guild slash commands.`);
         } else {
