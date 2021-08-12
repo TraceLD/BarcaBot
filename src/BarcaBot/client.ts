@@ -1,4 +1,5 @@
 import fs from "fs";
+import logger from "./logger";
 import { Client, ClientOptions, Collection } from "discord.js";
 import { SlashCommand } from "./slashCommand";
 import { REST } from "@discordjs/rest";
@@ -34,22 +35,26 @@ export class SlashCommandsClient extends Client<boolean> {
 
     (async () => {
       try {
-        console.log(`Detected ${commandsJson.length} slash command(s).`);
-        console.log("Started refreshing slash commands.");
+        logger.info(`Detected ${commandsJson.length} slash command(s).`);
+        logger.info("Started refreshing slash commands.");
 
         if (process.env.NODE_ENV === "DEVELOPMENT") {
           await rest.put(Routes.applicationGuildCommands(clientId, developmentGuildId), {
             body: commandsJson,
           });
 
-          console.log(`Successfully reloaded ${developmentGuildId} guild slash commands.`);
+          logger.log({
+            level: "info",
+            message: "Successfully reloaded development guild slash commands.",
+            guildId: developmentGuildId,
+          });
         } else {
           await rest.put(Routes.applicationCommands(clientId), { body: commandsJson });
 
-          console.log("Successfully reloaded global slash commands.");
+          logger.info("Successfully reloaded global slash commands.");
         }
       } catch (error) {
-        console.error(error);
+        logger.error(error);
       }
     })();
   }
