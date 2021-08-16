@@ -24,7 +24,7 @@ namespace BarcaBot.StatsApi.Infrastructure.Services
         {
             httpClient.BaseAddress = new Uri("https://api-football-v1.p.rapidapi.com/v3/");
             httpClient.DefaultRequestHeaders.Add("X-RapidAPI-Host", "api-football-v1.p.rapidapi.com");
-            httpClient.DefaultRequestHeaders.Add("X-RapidAPI-Key", "a3a8822390mshf3e32cd0adaf1ccp13ee7ajsnafde434daad1");
+            httpClient.DefaultRequestHeaders.Add("X-RapidAPI-Key", apiSettings.Token);
 
             _logger = logger;
             _httpClient = httpClient;
