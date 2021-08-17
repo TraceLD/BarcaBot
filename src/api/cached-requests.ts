@@ -3,7 +3,7 @@ import { getAsync, set } from "../cache/redis";
 import { Duration } from "luxon";
 
 export async function getWithCache<T>(uri: string, ttl: Duration): Promise<T> {
-  const cached: T | undefined = <T>await getAsync<T>(uri);
+  const cached: T | undefined = await getAsync<T>(uri);
 
   if (cached !== undefined) {
     return cached;

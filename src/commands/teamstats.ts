@@ -1,7 +1,7 @@
 import { CommandInteraction, MessageEmbed } from "discord.js";
 import { SlashCommandBuilder } from "@discordjs/builders";
 import { SlashCommand } from "../slashCommand";
-import team, { ITeam } from "../api/endpoints/team";
+import team, { ITeamStatistics } from "../api/endpoints/teamstats";
 
 const teamstats: SlashCommand = {
   data: new SlashCommandBuilder()
@@ -9,7 +9,7 @@ const teamstats: SlashCommand = {
     .setDescription("Shows FC Barcelona statistics"),
 
   execute: async (i: CommandInteraction) => {
-    const res: ITeam = await team.getWithCache();
+    const res: ITeamStatistics = await team.getWithCache();
     const embed: MessageEmbed = new MessageEmbed()
       .setTitle(`FCB Team Statistics | ${res.league.name}`)
       .setDescription(`FC Barcelona statistics in ${res.league.name}`)

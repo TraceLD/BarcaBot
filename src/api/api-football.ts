@@ -14,6 +14,7 @@ export const ids = {
   cdr: 143,
   barca: 529,
 };
+export const barcaLogo = "https://media.api-sports.io/football/teams/529.png";
 
 export async function get<T>(uri: string): Promise<T> {
   const fetchResponse: Response = await fetch(baseUrl + uri, {
@@ -53,6 +54,21 @@ interface IResponse<T> {
     total: string;
   };
   response: T;
+}
+
+export interface ILeague {
+  id: number;
+  name: string;
+  country: string;
+  logo: string;
+  flag: string;
+  season: number;
+}
+
+export interface ITeam {
+  id: number;
+  name: string;
+  logo: string;
 }
 
 export interface IHATStatistics {
