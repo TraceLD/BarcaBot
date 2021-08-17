@@ -36,7 +36,7 @@ export default {
   async getWithCache(): Promise<ITeam> {
     return await getWithCache<ITeam>(
       `teams/statistics?league=${ids.laLiga}&team=${ids.barca}&season=${apiFootballSeason}`,
-      this.ttl.as("seconds"),
+      this.ttl,
     );
   },
 };

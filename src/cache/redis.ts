@@ -2,6 +2,7 @@ import logger from "../logger";
 import redis, { RedisClient } from "redis";
 import { promisify } from "util";
 import { redisPassword } from "../config.json";
+import { Duration } from "luxon";
 
 const redisClient: RedisClient = redis.createClient({
   password: redisPassword,
@@ -36,8 +37,9 @@ async function getAsync<T>(key: string): Promise<T | undefined> {
   return response === null ? undefined : JSON.parse(response);
 }
 
-function set<T>(key: string, value: T, ttlInSeconds: number): boolean {
+function set<T>(key: string, value: T, ttl: Duration): boolean {
   const json: string = JSON.stringify(value);
+  const ttlInSeconds: number = ttl.as("seconds");
   const setRes: boolean = redisClient.set(key, json, "EX", ttlInSeconds);
 
   logger.log({
