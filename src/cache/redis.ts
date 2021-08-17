@@ -10,6 +10,14 @@ const getRawAsync = promisify(redisClient.get).bind(redisClient);
 
 redisClient.on("ready", () => {
   logger.info("Redis connection established and ready.");
+
+  redisClient.dbsize((err: Error | null, n: number) => {
+    if (err) {
+      logger.error(err);
+    } else {
+      logger.info(`Redis DB size: ${n}`);
+    }
+  });
 });
 
 redisClient.on("error", (err: Error) => {
