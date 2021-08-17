@@ -45,7 +45,14 @@ function set<T>(key: string, value: T, ttl: Duration): boolean {
   logger.log({
     level: "debug",
     message: "Set a new cache value",
-    context: { key: key, value: value, ttlInSeconds: ttlInSeconds },
+    context: {
+      key: key,
+      value: value,
+      ttl: {
+        seconds: ttlInSeconds,
+        object: ttl.toObject(),
+      },
+    },
     setRes: setRes,
   });
 
