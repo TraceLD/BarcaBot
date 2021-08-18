@@ -13,3 +13,19 @@ export async function getWithCache<T>(uri: string, ttl: Duration): Promise<T> {
     return fresh;
   }
 }
+
+export async function getPagedWithCache<T>(
+  uri: string,
+  uriContainsParams: boolean,
+  ttl: Duration,
+): Promise<T[]> {
+  const cached: T[] | undefined = await getAsync<T[]>(uri);
+
+  if (cached !== undefined) {
+    return cached;
+  } else {
+    const fresh: T[] = await getPaged<T>(uri, uriContainsParams);
+    set<T[]>(uri, fresh, ttl);
+    return fresh;
+  }
+}

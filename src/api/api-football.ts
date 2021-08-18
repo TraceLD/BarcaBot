@@ -40,8 +40,41 @@ export async function get<T>(uri: string): Promise<T> {
   return responseRoot.response;
 }
 
-export async function getPaged<T>(uri: string): Promise<Array<T>> {
-  throw new Error();
+export async function getPaged<T>(uri: string, uriContainsParams: boolean): Promise<T[]> {
+  let currentPage = 1;
+  let maxPage: number = Number.MAX_SAFE_INTEGER;
+  let data: T[] = [];
+
+  while (currentPage <= maxPage) {
+    const pageParam = uriContainsParams ? `&page=${currentPage}` : `?page=${currentPage}`;
+    const fetchResponse: Response = await fetch(baseUrl + uri + pageParam, {
+      method: "GET",
+      headers: defaultHeaders,
+    });
+
+    if (!fetchResponse.ok) {
+      throw new NonOkResponseError(
+        `API responded with non-OK code: ${fetchResponse.status}`,
+        fetchResponse.status,
+      );
+    }
+
+    const responseRoot: IResponse<T[]> = await fetchResponse.json();
+    const newData: T[] = responseRoot.response;
+
+    currentPage += 1;
+    maxPage = +responseRoot.paging.total;
+    data = [...data, ...newData];
+  }
+
+  logger.log({
+    level: "info",
+    message: "Received a fresh paged value from API-Football.",
+    endpoint: uri,
+    length: data.length,
+  });
+
+  return data;
 }
 
 interface IResponse<T> {

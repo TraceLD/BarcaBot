@@ -1,6 +1,8 @@
 import { CommandInteraction } from "discord.js";
 import { SlashCommandBuilder, SlashCommandStringOption } from "@discordjs/builders";
 import { SlashCommand } from "../slashCommand";
+import players from "../api/endpoints/players";
+import logger from "../logger";
 
 const command: SlashCommand = {
   data: new SlashCommandBuilder()
@@ -11,6 +13,8 @@ const command: SlashCommand = {
     .setDescription("Replies with pong"),
 
   execute: async (interaction: CommandInteraction) => {
+    const ps = await players.get();
+    logger.debug(JSON.stringify(ps));
     await interaction.reply("Hi");
   },
 };
