@@ -22,10 +22,10 @@ const command: SlashCommand = {
       stringUtils.sanitiseAccents(p.player.name.toLowerCase()).includes(name.toLowerCase()),
     );
 
-    if (matchedPlayer === undefined) {
+    if (!matchedPlayer) {
       const notFoundEmbed = new MessageEmbed()
         .setTitle(":x: Player not found")
-        .setDescription(`Could not find a FC Barcelona player with name \`${name}\``)
+        .setDescription(`Could not find a FC Barcelona player with name \`${name}\`.`)
         .setColor("RED")
         .setTimestamp()
         .setFooter(
@@ -36,7 +36,7 @@ const command: SlashCommand = {
       return;
     }
 
-    if (matchedPlayer.statistics === undefined) {
+    if (!matchedPlayer.statistics) {
       const noStatsEmbed = new MessageEmbed()
         .setTitle(":x: Statistics not found")
         .setDescription(
