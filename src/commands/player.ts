@@ -1,13 +1,13 @@
 import { CommandInteraction, MessageEmbed } from "discord.js";
 import { SlashCommandBuilder, SlashCommandStringOption } from "@discordjs/builders";
-import { SlashCommand } from "../slashCommand";
+import { ISlashCommand } from "../slashCommand";
 import { match } from "ts-pattern";
 import { StatsConverter } from "../utils/stats-converter";
 import playersApi, { ICombinedPlayer } from "../api/endpoints/players";
 import stringUtils from "../utils/string-utils";
 import { barcaLogo } from "../api/api-football";
 
-const command: SlashCommand = {
+const command: ISlashCommand = {
   data: new SlashCommandBuilder()
     .setName("player")
     .addStringOption((option: SlashCommandStringOption) =>

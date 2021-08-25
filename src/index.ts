@@ -1,7 +1,7 @@
 import logger from "./logger";
 import { Intents, Interaction } from "discord.js";
 import { SlashCommandsClient } from "./client";
-import { SlashCommand } from "./slashCommand";
+import { ISlashCommand } from "./slashCommand";
 import { token, clientId, developmentGuildId } from "./config.json";
 
 logger.log({ level: "info", message: "Environment", environment: process.env.NODE_ENV });
@@ -32,7 +32,7 @@ client.on("interactionCreate", async (interaction: Interaction) => {
   });
 
   try {
-    const command: SlashCommand | undefined = client.commands.get(interaction.commandName);
+    const command: ISlashCommand | undefined = client.commands.get(interaction.commandName);
 
     if (command === undefined) {
       scopedLogger.error("Could not find a matching command");

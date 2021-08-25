@@ -1,16 +1,16 @@
 import fs from "fs";
 import logger from "./logger";
 import { Client, ClientOptions, Collection } from "discord.js";
-import { SlashCommand } from "./slashCommand";
+import { ISlashCommand } from "./slashCommand";
 import { REST } from "@discordjs/rest";
 import { APIApplicationCommandOption, Routes } from "discord-api-types/v9";
 
 export class SlashCommandsClient extends Client<boolean> {
-  commands: Collection<string, SlashCommand>;
+  commands: Collection<string, ISlashCommand>;
 
   constructor(options: ClientOptions) {
     super(options);
-    this.commands = new Collection<string, SlashCommand>();
+    this.commands = new Collection<string, ISlashCommand>();
   }
 
   setUpCommands(token: string, clientId: string, developmentGuildId: string): void {
@@ -25,7 +25,7 @@ export class SlashCommandsClient extends Client<boolean> {
 
     for (const file of commandFiles) {
       // eslint-disable-next-line @typescript-eslint/no-var-requires
-      const command: SlashCommand = require(`./commands/${file}`).default;
+      const command: ISlashCommand = require(`./commands/${file}`).default;
 
       this.commands.set(command.data.name, command);
       commandsJson = [...commandsJson, command.data.toJSON()];

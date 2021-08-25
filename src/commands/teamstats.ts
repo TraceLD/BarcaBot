@@ -1,9 +1,9 @@
 import { CommandInteraction, MessageEmbed } from "discord.js";
 import { SlashCommandBuilder } from "@discordjs/builders";
-import { SlashCommand } from "../slashCommand";
+import { ISlashCommand } from "../slashCommand";
 import team, { ITeamStatistics } from "../api/endpoints/teamstats";
 
-const command: SlashCommand = {
+const command: ISlashCommand = {
   data: new SlashCommandBuilder()
     .setName("teamstats")
     .setDescription("Shows FC Barcelona statistics"),

@@ -1,6 +1,6 @@
 import { CommandInteraction, Formatters, MessageEmbed } from "discord.js";
 import { SlashCommandBuilder, SlashCommandStringOption } from "@discordjs/builders";
-import { SlashCommand } from "../slashCommand";
+import { ISlashCommand } from "../slashCommand";
 import matchesApi, { IMatch } from "../api/endpoints/matches";
 import { match } from "ts-pattern";
 import { ids, barcaLogo, ITeam } from "../api/api-football";
@@ -77,7 +77,7 @@ const getUpcoming = async function (): Promise<MessageEmbed> {
   return embed;
 };
 
-const command: SlashCommand = {
+const command: ISlashCommand = {
   data: new SlashCommandBuilder()
     .setName("matches")
     .addStringOption((option: SlashCommandStringOption) =>

@@ -1,10 +1,10 @@
 import { CommandInteraction } from "discord.js";
 import { SlashCommandBuilder, SlashCommandStringOption } from "@discordjs/builders";
-import { SlashCommand } from "../slashCommand";
+import { ISlashCommand } from "../slashCommand";
 import players from "../api/endpoints/players";
 import logger from "../logger";
 
-const command: SlashCommand = {
+const command: ISlashCommand = {
   data: new SlashCommandBuilder()
     .setName("ping")
     .addStringOption((option: SlashCommandStringOption) =>
