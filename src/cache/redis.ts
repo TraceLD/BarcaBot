@@ -31,7 +31,7 @@ async function getAsync<T>(key: string): Promise<T | undefined> {
   logger.log({
     level: "debug",
     message: "Obtained cached value",
-    context: { key: key, value: response },
+    context: { key: key },
   });
 
   return response === null ? undefined : JSON.parse(response);
