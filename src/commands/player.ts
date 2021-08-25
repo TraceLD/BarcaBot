@@ -6,6 +6,7 @@ import { StatsConverter } from "../utils/stats-converter";
 import playersApi, { ICombinedPlayer } from "../api/endpoints/players";
 import stringUtils from "../utils/string-utils";
 import { barcaLogo } from "../api/api-football";
+import { countriesMap } from "../utils/country-codes";
 
 const command: ISlashCommand = {
   data: new SlashCommandBuilder()
@@ -53,10 +54,15 @@ const command: ISlashCommand = {
       return;
     }
 
+    const countryCode: string | undefined = countriesMap.get(matchedPlayer.player.nationality);
     const stats = matchedPlayer.statistics;
     const converter = new StatsConverter(matchedPlayer.statistics.games.minutes);
     let embed = new MessageEmbed()
-      .setTitle(matchedPlayer.player.name)
+      .setTitle(
+        !countryCode
+          ? matchedPlayer.player.name
+          : `${matchedPlayer.player.name} :flag_${countryCode}:`,
+      )
       .setDescription(
         `Position: ${stats.games.position}\nAge: ${matchedPlayer.player.age}\nHeight: ${matchedPlayer.player.height}\nWeight: ${matchedPlayer.player.weight}`,
       )

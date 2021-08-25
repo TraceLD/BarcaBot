@@ -1,0 +1,19 @@
+{
+  "name": "barcabot-country-codes-source-generator",
+  "version": "1.0.0",
+  "description": "Source generator for country-codes.ts",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TraceLD/BarcaBot.git"
+  },
+  "author": "TraceLD",
+  "license": "AGPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/TraceLD/BarcaBot/issues"
+  },
+  "homepage": "https://github.com/TraceLD/BarcaBot#readme"
+}
