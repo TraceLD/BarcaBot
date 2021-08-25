@@ -77,7 +77,7 @@ const getUpcoming = async function (): Promise<MessageEmbed> {
   return embed;
 };
 
-const matches: SlashCommand = {
+const command: SlashCommand = {
   data: new SlashCommandBuilder()
     .setName("matches")
     .addStringOption((option: SlashCommandStringOption) =>
@@ -104,4 +104,4 @@ const matches: SlashCommand = {
   },
 };
 
-export default matches;
+export default command;

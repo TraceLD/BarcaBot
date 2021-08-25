@@ -1,5 +1,5 @@
 export default {
-  sanitiseAccents(name: string): string {
-    return name.normalize("NFD").replace(/\p{Diacritic}/gu, "");
+  sanitiseAccents(str: string): string {
+    return str.normalize("NFD").replace(/\p{Diacritic}/gu, "");
   },
 };

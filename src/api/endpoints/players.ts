@@ -80,7 +80,7 @@ export interface IPlayer {
     height: string;
     weight: string;
     injured: boolean;
-    photo: string;
+    photo?: string;
   };
   statistics: IPlayerStatistics[];
 }

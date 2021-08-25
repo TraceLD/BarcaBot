@@ -3,7 +3,7 @@ import { SlashCommandBuilder } from "@discordjs/builders";
 import { SlashCommand } from "../slashCommand";
 import team, { ITeamStatistics } from "../api/endpoints/teamstats";
 
-const teamstats: SlashCommand = {
+const command: SlashCommand = {
   data: new SlashCommandBuilder()
     .setName("teamstats")
     .setDescription("Shows FC Barcelona statistics"),
@@ -39,4 +39,4 @@ const teamstats: SlashCommand = {
   },
 };
 
-export default teamstats;
+export default command;
