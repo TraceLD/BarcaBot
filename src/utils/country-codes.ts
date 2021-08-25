@@ -235,6 +235,7 @@ export const countriesMap: Map<string, string> = new Map<string, string>([
   ["United Arab Emirates", "ae"],
   ["United Kingdom of Great Britain and Northern Ireland", "gb"],
   ["United States of America", "us"],
+  ["USA", "us"],
   ["United States Minor Outlying Islands", "um"],
   ["Uruguay", "uy"],
   ["Uzbekistan", "uz"],
