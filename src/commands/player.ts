@@ -109,19 +109,15 @@ const command: SlashCommand = {
     };
     const addTackles = function (e: MessageEmbed): MessageEmbed {
       const tackles = converter.toPer90(stats.tackles.total);
-      let desc = `Tackles: ${tackles.toFixed(2)}`;
+      const interceptions = converter.toPer90(stats.tackles.interceptions ?? 0);
+      const blocks = converter.toPer90(stats.tackles.blocks ?? 0);
 
-      if (stats.tackles.interceptions) {
-        const interceptions = converter.toPer90(stats.tackles.interceptions);
-        desc += `, Interceptions: ${interceptions.toFixed(2)}`;
-      }
-
-      if (stats.tackles.blocks) {
-        const blocks = converter.toPer90(stats.tackles.blocks);
-        desc += `, Blocks: ${blocks.toFixed(2)}`;
-      }
-
-      return e.addField("Tackles per 90 minutes", desc);
+      return e.addField(
+        "Tackles per 90 minutes",
+        `Tackles: ${tackles.toFixed(2)}, Interceptions: ${interceptions.toFixed(
+          2,
+        )}, Blocks: ${blocks.toFixed(2)}`,
+      );
     };
     const addGoalsConceded = function (e: MessageEmbed): MessageEmbed {
       return e.addField("Goals conceded", stats.goals.conceded.toLocaleString());
@@ -141,8 +137,7 @@ const command: SlashCommand = {
         return e;
       })
       .with("Defender", (): MessageEmbed => {
-        let e = addGoalsConceded(embed);
-        e = addTackles(e);
+        let e = addTackles(embed);
         e = addPasses(e);
         return e;
       })
