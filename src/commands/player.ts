@@ -151,7 +151,6 @@ const command: SlashCommand = {
       });
 
     await i.reply({ embeds: [embed] });
-    return;
   },
 };
 
