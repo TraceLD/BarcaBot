@@ -3,12 +3,7 @@ import { SlashCommandBuilder, SlashCommandStringOption } from "@discordjs/builde
 import { ISlashCommand } from "../slashCommand";
 
 const command: ISlashCommand = {
-  data: new SlashCommandBuilder()
-    .setName("ping")
-    .addStringOption((option: SlashCommandStringOption) =>
-      option.setName("test").setDescription("Tests options").setRequired(true),
-    )
-    .setDescription("Replies with pong"),
+  data: new SlashCommandBuilder().setName("ping").setDescription("Replies with pong"),
 
   execute: async (interaction: CommandInteraction) => {
     await interaction.reply("Pong!");
