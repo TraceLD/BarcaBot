@@ -6,7 +6,7 @@ import { StatsConverter } from "../utils/stats-converter";
 import playersApi, { ICombinedPlayer } from "../api/endpoints/players";
 import stringUtils from "../utils/string-utils";
 import { barcaLogo } from "../api/api-football";
-import { countriesMap, getFlagEmoji } from "../utils/country-codes";
+import { getFlagEmoji } from "../utils/country-codes";
 
 const command: ISlashCommand = {
   data: new SlashCommandBuilder()
