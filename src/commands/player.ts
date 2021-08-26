@@ -58,7 +58,7 @@ const command: ISlashCommand = {
     const stats = matchedPlayer.statistics;
     const converter = new StatsConverter(matchedPlayer.statistics.games.minutes);
     let embed = new MessageEmbed()
-      .setTitle(`${matchedPlayer.player.name} ${emoji ?? ""}`)
+      .setTitle(`${matchedPlayer.player.firstname} ${matchedPlayer.player.lastname} ${emoji ?? ""}`)
       .setDescription(
         `Position: ${stats.games.position}\nAge: ${matchedPlayer.player.age}\nHeight: ${matchedPlayer.player.height}\nWeight: ${matchedPlayer.player.weight}`,
       )
