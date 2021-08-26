@@ -1,5 +1,5 @@
 import { CommandInteraction, MessageEmbed } from "discord.js";
-import { SlashCommandBuilder, SlashCommandStringOption } from "@discordjs/builders";
+import { SlashCommandBuilder } from "@discordjs/builders";
 import { ISlashCommand } from "../slashCommand";
 import { IPlayer } from "../api/endpoints/players";
 import { barcaLogo, ids } from "../api/api-football";
