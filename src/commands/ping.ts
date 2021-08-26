@@ -1,5 +1,5 @@
 import { CommandInteraction } from "discord.js";
-import { SlashCommandBuilder, SlashCommandStringOption } from "@discordjs/builders";
+import { SlashCommandBuilder } from "@discordjs/builders";
 import { ISlashCommand } from "../slashCommand";
 
 const command: ISlashCommand = {
