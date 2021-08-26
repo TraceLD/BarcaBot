@@ -1,3 +1,8 @@
+export function getFlagEmoji(countryName: string): string | undefined {
+  const countryCode: string | undefined = countriesMap.get(countryName);
+  return !countryCode ? undefined : `:flag_${countryCode}:`;
+}
+
 export const countriesMap: Map<string, string> = new Map<string, string>([
   ["Afghanistan", "af"],
   ["Åland Islands", "ax"],
