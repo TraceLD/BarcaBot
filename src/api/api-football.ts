@@ -1,6 +1,7 @@
 import logger from "../logger";
 import fetch, { Response } from "node-fetch";
 import { apiFootballToken } from "../config.json";
+import { NonOkResponseError } from "../errors/api-errors";
 
 const baseUrl = "https://api-football-v1.p.rapidapi.com/v3/";
 const defaultHeaders = {
@@ -119,31 +120,4 @@ export interface IHATAverageStatistics {
 export interface IGoalStatistics {
   total: IHATStatistics;
   average: IHATAverageStatistics;
-}
-
-/**
- * Thrown when a GET request returns an error response code,
- * instead of a 200 OK + JSON body that can be mapped to a TS model.
- */
-class NonOkResponseError extends Error {
-  private errorCode: number;
-
-  /**
-   * Instantiates a new instance of @see NonOkResponseError .
-   *
-   * @param message Error message.
-   * @param errorCode HTTP Response error code.
-   */
-  constructor(message: string, errorCode: number) {
-    super(message);
-    this.name = "NonOkResponseError";
-    this.errorCode = errorCode;
-  }
-
-  /**
-   * Gets the HTTP Response error code associated with the @see NonOkResponseError .
-   */
-  get httpErrorCode(): number {
-    return this.errorCode;
-  }
 }
