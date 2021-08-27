@@ -7,7 +7,7 @@ import { ids, barcaLogo, ITeam } from "../api/api-football";
 
 const getMatchDescription = function (match: IMatch): string {
   const stadium: string =
-    match.fixture.venue.name === null || match.fixture.venue.name === undefined
+    match.fixture.venue.name === null || !match.fixture.venue.name
       ? "Unknown"
       : `${match.fixture.venue.name}, ${match.fixture.venue.city}`;
   const date = Formatters.time(match.fixture.timestamp, "F");
