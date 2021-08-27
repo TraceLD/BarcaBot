@@ -1,6 +1,7 @@
 import fetch, { Response } from "node-fetch";
 import { plotlyConfig } from "../config.json";
 import { NonOkResponseError } from "../errors/api-errors";
+import { arrayBufferToBuffer } from "../utils/buffer-utils";
 
 const auth: string = Buffer.from(`${plotlyConfig.username}:${plotlyConfig.key}`).toString("base64");
 const defaultHeaders = {
@@ -34,7 +35,7 @@ export const defaultLayout = {
 };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export async function getPlot(body: any): Promise<ArrayBuffer> {
+export async function getPlot(body: any): Promise<Buffer> {
   const res: Response = await fetch("https://api.plot.ly/v2/images/", {
     method: "POST",
     headers: defaultHeaders,
@@ -45,5 +46,7 @@ export async function getPlot(body: any): Promise<ArrayBuffer> {
     throw new NonOkResponseError(`API responded with non-OK code: ${res.status}`, res.status);
   }
 
-  return await res.arrayBuffer();
+  const responseAsAB: ArrayBuffer = await res.arrayBuffer();
+
+  return arrayBufferToBuffer(responseAsAB);
 }

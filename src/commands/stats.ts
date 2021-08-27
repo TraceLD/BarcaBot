@@ -1,19 +1,10 @@
 import { CommandInteraction, MessageEmbed } from "discord.js";
 import { SlashCommandBuilder, SlashCommandStringOption } from "@discordjs/builders";
 import { ISlashCommand } from "../slashCommand";
-import { getPlayerStatsPlot } from "../charts/player-stats";
+import { getPlayerStatsPlot } from "../api/endpoints/charts/player-stats";
 import playersApi, { ICombinedPlayer } from "../api/endpoints/players";
 import stringUtils from "../utils/string-utils";
-import { Readable } from "stream";
 
-const toBuffer = function toBuffer(ab: ArrayBuffer): Buffer {
-  const buf = Buffer.alloc(ab.byteLength);
-  const view = new Uint8Array(ab);
-  for (let i = 0; i < buf.length; ++i) {
-    buf[i] = view[i];
-  }
-  return buf;
-};
 const command: ISlashCommand = {
   data: new SlashCommandBuilder()
     .setName("stats")
@@ -56,10 +47,9 @@ const command: ISlashCommand = {
       matchedPlayers = [...matchedPlayers, matchedPlayer];
     }
 
-    const chart = await getPlayerStatsPlot(matchedPlayers);
-    const stream = Readable.from(toBuffer(chart));
+    const chart: Buffer = await getPlayerStatsPlot(matchedPlayers);
 
-    await i.reply({ content: "Stats", files: [stream] });
+    await i.reply({ files: [chart] });
   },
 };
 

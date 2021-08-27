@@ -1,11 +1,16 @@
-import { ICombinedPlayer } from "../api/endpoints/players";
-import { StatsConverter } from "../utils/stats-converter";
-import { defaultLayout, getPlot } from "./plotly";
+import { ICombinedPlayer } from "../players";
+import { StatsConverter } from "../../../utils/stats-converter";
+import { defaultLayout, getPlot } from "../../plotly";
 
-export async function getPlayerStatsPlot(players: ICombinedPlayer[]): Promise<ArrayBuffer> {
+export async function getPlayerStatsPlot(players: ICombinedPlayer[]): Promise<Buffer> {
   const chart = {
     figure: {
-      data: [] as any[],
+      data: [] as {
+        name: string;
+        type: string;
+        x: string[];
+        y: number[];
+      }[],
       layout: defaultLayout,
     },
     height: 500,
@@ -47,10 +52,10 @@ export async function getPlayerStatsPlot(players: ICombinedPlayer[]): Promise<Ar
       converter.toPer90(stats.fouls.committed),
     ];
     const trace = {
+      name: p.player.name,
       type: "bar",
       x: x,
       y: y,
-      name: p.player.name,
     };
 
     chart.figure.data.push(trace);
