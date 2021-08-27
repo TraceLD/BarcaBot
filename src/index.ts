@@ -1,12 +1,12 @@
 import logger from "./logger";
 import { Intents, Interaction } from "discord.js";
-import { SlashCommandsClient } from "./client";
+import { BarcaBotClient } from "./client";
 import { ISlashCommand } from "./slashCommand";
 import { discordConfig } from "./config.json";
 
 logger.log({ level: "info", message: "Environment", environment: process.env.NODE_ENV });
 
-const client = new SlashCommandsClient({
+const client = new BarcaBotClient({
   intents: [Intents.FLAGS.GUILDS],
 });
 

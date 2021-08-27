@@ -5,7 +5,7 @@ import { ISlashCommand } from "./slashCommand";
 import { REST } from "@discordjs/rest";
 import { APIApplicationCommandOption, Routes } from "discord-api-types/v9";
 
-export class SlashCommandsClient extends Client<boolean> {
+export class BarcaBotClient extends Client<boolean> {
   commands: Collection<string, ISlashCommand>;
 
   constructor(options: ClientOptions) {
