@@ -3,7 +3,7 @@
  * instead of a 200 OK + JSON body that can be mapped to a TS model.
  */
 export class NonOkResponseError extends Error {
-  private errorCode: number;
+  private readonly errorCode: number;
 
   /**
    * Instantiates a new instance of @see NonOkResponseError .
