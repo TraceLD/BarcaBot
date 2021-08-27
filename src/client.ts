@@ -16,7 +16,7 @@ export class SlashCommandsClient extends Client<boolean> {
   setUpCommands(token: string, clientId: string, developmentGuildId: string): void {
     const commandFiles: string[] = fs
       .readdirSync("./commands")
-      .filter((file) => file.endsWith(".ts"));
+      .filter((file) => file.match(".[jt]s$"));
     let commandsJson: {
       name: string;
       description: string;
