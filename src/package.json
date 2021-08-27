@@ -1,6 +1,6 @@
 {
   "name": "barcabot",
-  "version": "3.0.0-dev",
+  "version": "3.0.0",
   "description": "FC Barcelona themed Discord bot.",
   "main": "index.js",
   "scripts": {
