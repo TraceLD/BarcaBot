@@ -4,7 +4,7 @@ import { ISlashCommand } from "../slashCommand";
 import { match } from "ts-pattern";
 import { StatsConverter } from "../utils/stats-converter";
 import playersApi, { ICombinedPlayer } from "../api/endpoints/players";
-import stringUtils from "../utils/string-utils";
+import { sanitiseAccents } from "../utils/string-utils";
 import { barcaLogo } from "../api/api-football";
 import { getFlagEmoji } from "../utils/country-codes";
 
@@ -20,7 +20,7 @@ const command: ISlashCommand = {
     const name = i.options.getString("name", true);
     const players = await playersApi.get();
     const matchedPlayer: ICombinedPlayer | undefined = players.find((p) =>
-      stringUtils.sanitiseAccents(p.player.name.toLowerCase()).includes(name.toLowerCase()),
+      sanitiseAccents(p.player.name.toLowerCase()).includes(name.toLowerCase()),
     );
 
     if (!matchedPlayer) {

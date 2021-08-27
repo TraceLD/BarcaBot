@@ -3,7 +3,7 @@ import { SlashCommandBuilder, SlashCommandStringOption } from "@discordjs/builde
 import { ISlashCommand } from "../slashCommand";
 import { getPlayerStatsPlot } from "../api/endpoints/charts/player-stats";
 import playersApi, { ICombinedPlayer } from "../api/endpoints/players";
-import stringUtils from "../utils/string-utils";
+import { sanitiseAccents } from "../utils/string-utils";
 
 const command: ISlashCommand = {
   data: new SlashCommandBuilder()
@@ -27,7 +27,7 @@ const command: ISlashCommand = {
 
     for (const n of playerNames) {
       const matchedPlayer: ICombinedPlayer | undefined = players.find((p) =>
-        stringUtils.sanitiseAccents(p.player.name.toLowerCase()).includes(n.toLowerCase()),
+        sanitiseAccents(p.player.name.toLowerCase()).includes(n.toLowerCase()),
       );
 
       if (!matchedPlayer) {
