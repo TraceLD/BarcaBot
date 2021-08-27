@@ -1,7 +1,7 @@
 import logger from "../logger";
 import fetch, { Response } from "node-fetch";
 import { apiFootballToken } from "../config.json";
-import { NonOkResponseError } from "../errors/api-errors";
+import { NonOkResponseError } from "./api-errors";
 
 const baseUrl = "https://api-football-v1.p.rapidapi.com/v3/";
 const defaultHeaders = {

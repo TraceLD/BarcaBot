@@ -1,6 +1,6 @@
 import fetch, { Response } from "node-fetch";
 import { plotlyConfig } from "../config.json";
-import { NonOkResponseError } from "../errors/api-errors";
+import { NonOkResponseError } from "./api-errors";
 import { arrayBufferToBuffer } from "../utils/buffer-utils";
 
 const auth: string = Buffer.from(`${plotlyConfig.username}:${plotlyConfig.key}`).toString("base64");
