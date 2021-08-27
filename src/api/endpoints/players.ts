@@ -1,7 +1,7 @@
 import { Duration } from "luxon";
 import { ids, ILeague, ITeam } from "../api-football";
 import { getPagedWithCache } from "../cached-requests";
-import { apiFootballSeason } from "../../config.json";
+import { apiFootballConfig } from "../../config.json";
 import Enumerable from "linq";
 
 export type ICombinedPlayer = Omit<IPlayer, "statistics"> & {
@@ -89,7 +89,7 @@ export default {
   ttl: Duration.fromObject({ days: 1 }),
   async get(): Promise<ICombinedPlayer[]> {
     const data: IPlayer[] = await getPagedWithCache<IPlayer>(
-      `players?team=${ids.barca}&season=${apiFootballSeason}`,
+      `players?team=${ids.barca}&season=${apiFootballConfig.season}`,
       true,
       this.ttl,
     );

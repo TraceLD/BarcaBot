@@ -1,6 +1,6 @@
 import { ids, IGoalStatistics, IHATStatistics, ILeague, ITeam } from "../api-football";
 import { getWithCache } from "../cached-requests";
-import { apiFootballSeason } from "../../config.json";
+import { apiFootballConfig } from "../../config.json";
 import { Duration } from "luxon";
 
 export interface ITeamStatistics {
@@ -24,7 +24,7 @@ export default {
   ttl: Duration.fromObject({ days: 1 }),
   async getWithCache(): Promise<ITeamStatistics> {
     return await getWithCache<ITeamStatistics>(
-      `teams/statistics?league=${ids.laLiga}&team=${ids.barca}&season=${apiFootballSeason}`,
+      `teams/statistics?league=${ids.laLiga}&team=${ids.barca}&season=${apiFootballConfig.season}`,
       this.ttl,
     );
   },

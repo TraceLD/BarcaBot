@@ -2,7 +2,7 @@ import logger from "./logger";
 import { Intents, Interaction } from "discord.js";
 import { SlashCommandsClient } from "./client";
 import { ISlashCommand } from "./slashCommand";
-import { token, clientId, developmentGuildId } from "./config.json";
+import { discordConfig } from "./config.json";
 
 logger.log({ level: "info", message: "Environment", environment: process.env.NODE_ENV });
 
@@ -10,7 +10,7 @@ const client = new SlashCommandsClient({
   intents: [Intents.FLAGS.GUILDS],
 });
 
-client.setUpCommands(token, clientId, developmentGuildId);
+client.setUpCommands(discordConfig.token, discordConfig.clientId, discordConfig.developmentGuildId);
 
 client.once("ready", () => {
   logger.info("Bot ready!");
@@ -19,7 +19,7 @@ client.once("ready", () => {
 client.on("interactionCreate", async (interaction: Interaction) => {
   if (
     !interaction.isCommand() ||
-    client.commands === undefined ||
+    !client.commands ||
     !client.commands.has(interaction.commandName)
   ) {
     return;
@@ -34,7 +34,7 @@ client.on("interactionCreate", async (interaction: Interaction) => {
   try {
     const command: ISlashCommand | undefined = client.commands.get(interaction.commandName);
 
-    if (command === undefined) {
+    if (!command) {
       scopedLogger.error("Could not find a matching command");
       return interaction.reply({ content: "Could not find a matching command." });
     }
@@ -49,4 +49,4 @@ client.on("interactionCreate", async (interaction: Interaction) => {
   }
 });
 
-client.login(token);
+client.login(discordConfig.token);

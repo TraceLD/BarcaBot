@@ -1,11 +1,11 @@
 import logger from "../logger";
 import redis, { RedisClient } from "redis";
 import { promisify } from "util";
-import { redisPassword } from "../config.json";
+import { redisConfig } from "../config.json";
 import { Duration } from "luxon";
 
 const redisClient: RedisClient = redis.createClient({
-  password: redisPassword,
+  password: redisConfig.password,
 });
 const getRawAsync = promisify(redisClient.get).bind(redisClient);
 

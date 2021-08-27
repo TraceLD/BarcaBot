@@ -1,7 +1,7 @@
 import { Duration } from "luxon";
 import { ids, IHATStatistics, ILeague, ITeam } from "../api-football";
 import { getWithCache } from "../cached-requests";
-import { apiFootballSeason } from "../../config.json";
+import { apiFootballConfig } from "../../config.json";
 
 export interface IMatch {
   fixture: {
@@ -43,13 +43,13 @@ export default {
   ttl: Duration.fromObject({ days: 1 }),
   async getLastWithCache(): Promise<IMatch[]> {
     return await getWithCache<IMatch[]>(
-      `fixtures?team=${ids.barca}&season=${apiFootballSeason}&last=5`,
+      `fixtures?team=${ids.barca}&season=${apiFootballConfig.season}&last=5`,
       this.ttl,
     );
   },
   async getUpcomingWithCache(): Promise<IMatch[]> {
     return await getWithCache<IMatch[]>(
-      `fixtures?team=${ids.barca}&season=${apiFootballSeason}&next=5`,
+      `fixtures?team=${ids.barca}&season=${apiFootballConfig.season}&next=5`,
       this.ttl,
     );
   },
