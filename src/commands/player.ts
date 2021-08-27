@@ -7,6 +7,7 @@ import playersApi, { ICombinedPlayer } from "../api/endpoints/players";
 import { sanitiseAccents } from "../utils/string-utils";
 import { barcaLogo } from "../api/api-football";
 import { getFlagEmoji } from "../utils/country-codes";
+import { getErrorEmbed } from "../embeds/error-embeds";
 
 const command: ISlashCommand = {
   data: new SlashCommandBuilder()
@@ -24,31 +25,20 @@ const command: ISlashCommand = {
     );
 
     if (!matchedPlayer) {
-      const notFoundEmbed = new MessageEmbed()
-        .setTitle(":x: Player not found")
-        .setDescription(`Could not find a FC Barcelona player with name \`${name}\`.`)
-        .setColor("RED")
-        .setTimestamp()
-        .setFooter(
-          `This statistic updates every ${playersApi.ttl.as("days").toLocaleString()} day(s).`,
-        );
+      const notFoundEmbed = getErrorEmbed(
+        ":x: Player not found",
+        `Could not find a FC Barcelona player with name \`${name}\`.`,
+      );
 
       i.reply({ embeds: [notFoundEmbed] });
       return;
     }
 
     if (!matchedPlayer.statistics) {
-      const noStatsEmbed = new MessageEmbed()
-        .setTitle(":x: Statistics not found")
-        .setDescription(
-          `Could not find statistics for the matched FC Barcelona player - \`${matchedPlayer.player.name}\``,
-        )
-        .setColor("RED")
-        .setThumbnail(matchedPlayer.player.photo ?? barcaLogo)
-        .setTimestamp()
-        .setFooter(
-          `This statistic updates every ${playersApi.ttl.as("days").toLocaleString()} day(s).`,
-        );
+      const noStatsEmbed = getErrorEmbed(
+        ":x: Player not found",
+        `Could not find statistics for the matched FC Barcelona player - \`${matchedPlayer.player.name}\``,
+      );
 
       i.reply({ embeds: [noStatsEmbed] });
       return;

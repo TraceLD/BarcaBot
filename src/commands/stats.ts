@@ -1,9 +1,10 @@
-import { CommandInteraction, MessageEmbed } from "discord.js";
+import { CommandInteraction } from "discord.js";
 import { SlashCommandBuilder, SlashCommandStringOption } from "@discordjs/builders";
 import { ISlashCommand } from "../slashCommand";
 import { getPlayerStatsPlot } from "../api/endpoints/charts/player-stats";
 import playersApi, { ICombinedPlayer } from "../api/endpoints/players";
 import { sanitiseAccents } from "../utils/string-utils";
+import { getErrorEmbed } from "../embeds/error-embeds";
 
 const command: ISlashCommand = {
   data: new SlashCommandBuilder()
@@ -31,14 +32,10 @@ const command: ISlashCommand = {
       );
 
       if (!matchedPlayer) {
-        const notFoundEmbed = new MessageEmbed()
-          .setTitle(":x: Player not found")
-          .setDescription(`Could not find a FC Barcelona player with name \`${name}\`.`)
-          .setColor("RED")
-          .setTimestamp()
-          .setFooter(
-            `This statistic updates every ${playersApi.ttl.as("days").toLocaleString()} day(s).`,
-          );
+        const notFoundEmbed = getErrorEmbed(
+          ":x: Player not found",
+          `Could not find a FC Barcelona player with name \`${n}\`.`,
+        );
 
         i.reply({ embeds: [notFoundEmbed] });
         return;

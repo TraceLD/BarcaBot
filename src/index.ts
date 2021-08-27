@@ -3,6 +3,7 @@ import { Intents, Interaction } from "discord.js";
 import { BarcaBotClient } from "./client";
 import { ISlashCommand } from "./slashCommand";
 import { discordConfig } from "./config.json";
+import { jsErrorToEmbed } from "./embeds/error-embeds";
 
 logger.log({ level: "info", message: "Environment", environment: process.env.NODE_ENV });
 
@@ -40,11 +41,11 @@ client.on("interactionCreate", async (interaction: Interaction) => {
     }
 
     await command.execute(interaction);
-  } catch (error) {
-    scopedLogger.error(error);
+  } catch (err) {
+    scopedLogger.error(err);
 
     return interaction.reply({
-      content: "There was an error while executing this command!",
+      embeds: [jsErrorToEmbed(err)],
     });
   }
 });
