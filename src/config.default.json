@@ -1,0 +1,18 @@
+{
+  "discordConfig": {
+    "developmentGuildId": "",
+    "clientId": "",
+    "token": ""
+  },
+  "redisConfig": {
+    "password": ""
+  },
+  "apiFootballConfig": {
+    "token": "",
+    "season": 2021
+  },
+  "plotlyConfig": {
+    "username": "",
+    "key": ""
+  }
+}
