@@ -2,96 +2,110 @@
 <html>
 
 <head>
-    <meta charset='utf-8'>
-    <meta lang="en">
-    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>BarcaBot - FC Barcelona themed Discord bot</title>
-    <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel='stylesheet' type='text/css' media='screen' href='index.css'>
+  <meta charset='utf-8'>
+  <meta lang="en">
+  <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+  <title>BarcaBot - FC Barcelona themed Discord bot</title>
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+  <link rel='stylesheet' type='text/css' media='screen' href='index.css'>
 </head>
 
 <body>
-    <header>
-        <h1>BarcaBot</h1>
-        <aside>FC Barcelona themed Discord bot.</aside>
-    </header>
+  <header>
+    <h1>BarcaBot</h1>
+    <aside>FC Barcelona themed Discord bot.</aside>
+  </header>
 
-    <div id="invite">
-        <h2>Invite the bot</h2>
-        <p><a href="https://discord.com/api/oauth2/authorize?client_id=554961196764233735&permissions=117760&scope=bot">Click here to invite the bot to your server</a> or join the best FC Barcelona Discord server, for
-            which this bot was originally created, via the link below:</p>
-        <a href="https://discord.gg/MYW5n7h">
-            <img src="https://discord.com/api/guilds/290536706132672514/widget.png?style=banner2">
-        </a>
+  <div id="invite">
+    <h2>Invite the bot</h2>
+    <p><a
+        href="https://discord.com/api/oauth2/authorize?client_id=554961196764233735&permissions=242666032192&scope=applications.commands%20bot">Click
+        here to invite the bot to your server</a> or join the best FC Barcelona Discord server, for which this
+      bot was originally created, via the link below:</p>
+    <a href="https://discord.gg/MYW5n7h">
+      <img src="https://discord.com/api/guilds/290536706132672514/widget.png?style=banner2">
+    </a>
+  </div>
+
+  <div id="commands">
+    <h2>Available commands</h2>
+    <p>The bot is actively maintained, so new commands can be added at any time. If you have an idea for a command,
+      <a href="https://github.com/TraceLD/BarcaBot/issues/new">open a GitHub issue</a> or contact Trace#8994 on
+      Discord.
+    </p>
+
+    <div id="team-commands">
+      <h3>Team information</h3>
+      <p class="cmd">/teamstats</p>
+      <p class="desc">Shows information about the FC Barcelona team including form and statistics (such as goals
+        scored/conceded).</p>
     </div>
 
-    <div id="commands">
-        <h2>Available commands</h2>
-        <p>The bot is actively maintained, so new commands can be added at any time. If you have an idea for a command,
-            contact Trace#8994 on Discord or open a GitHub issue.</p>
-        <div id="player-commands">
-            <h3>Player info</h2>
-                <p>=player <i>&lt;player_name&gt;</i> <br> Shows information (including statistics) about a Barca
-                    player.</p>
-        </div>
-        <div id="schedule-commands">
-            <h3>FC Barcelona matches</h2>
-                <p>=schedule <br> Shows upcoming Barca matches.</p>
-        </div>
-        <div id="table-commands">
-            <h3>LaLiga Table</h3>
-            <p>=table top <br> Shows LaLiga's current Top 5.</p>
-            <p>=table bottom <br> Shows LaLiga's current Bottom 5.</p>
-        </div>
-        <div id="scorers-commands">
-            <h3>LaLiga Top Scorers</h3>
-            <p>=scorers <br> Shows LaLiga's current top scorers.</p>
-        </div>
-        <div id="stats-commands">
-            <h3>Statistics</h3>
-            <p>=stats <i>&lt;player_name&gt;</i> <br> Shows statistics chart for a given player.</p>
-            <p>=stats <i>&lt;player_name&gt;</i> <i>&lt;player_name2&gt;</i> <i>&lt;player_name3&gt;</i> etc. <br> Shows
-                statistics chart comparing given players.</p>
-        </div>
+    <div id="player-commands">
+      <h3>Player information</h3>
+      <p class="cmd">/player <i>&lt;player_name&gt;</i></p>
+      <p class="desc">Shows information and statistics for a FC Barcelona player.</p>
     </div>
-
-    <hr>
-
-    <div id="open-source">
-        <h2>Open-source</h2>
-        <p>BarcaBot is, and forever will be, a fully open-source project. It is licensed under <a
-                href="https://github.com/TraceLD/BarcaBot/blob/master/LICENSE">AGPL-3.0 License</a> and is hosted at <a
-                href="https://github.com/TraceLD/BarcaBot">github.com/TraceLD/BarcaBot</a>.</p>
+    <div id="schedule-commands">
+      <h3>FC Barcelona matches</h3>
+      <div>
+        <p class="cmd">/matches Last</p>
+        <p class="desc">Shows results of the last five FC Barcelona matches.</p>
+      </div>
+      <div>
+        <p class="cmd">/matches Upcoming</p>
+        <p class="desc">Shows information about the next five FC Barcelona matches.</p>
+      </div>
     </div>
-
-    <div id="self-hosting">
-        <h2>Self-hosting</h2>
-        <p>To learn how to self-host BarcaBot head over to <a href="WIP">our GitHub Wiki</a>.</p>
+    <div id="scorers-commands">
+      <h3>LaLiga Top Scorers (Pichichi)</h3>
+      <p class="cmd">/pichichi</p>
+      <p class="desc">Shows the top scorers of LaLiga Santander. The top scorer at the end of the season will be
+        awarded the Pichichi Trophy.</p>
     </div>
-
-    <div id="data">
-        <h2>Data source</h2>
-        <p>BarcaBot requires a lot of data to function, from player stats to the match schedule. I've put a lot of
-            thought into where this data should be obtained from. The easiest (and cheapest) solution would be to
-            scrape sites like WhoScored, Flashscores, etc. using one of the scraping libraries as that would provide
-            access to the largest array of data, however, this solution comes
-            with many legal, as well as ethical conerns, and therefore I've deemed it unsuitable. There are football
-            stats and data provides such as Opta, but the issue with them is that they can cost hundreds, if not
-            thousands of pounds per month.</p>
-        <p>
-            I've ended up going with a combination of two Freemium APIs - API-FOOTBALL and FootballData. They both
-            provide a basic free tier, which I can use for everything BarcaBot needs. Instead of calling the API
-            every single time a user requests a command, I'm updating my own database with data on a schedule. This,
-            while not providing truly real time data, allows me to essentially
-            bypass any rate limits.
-        </p>
+    <div id="stats-commands">
+      <h3>Statistics charts</h3>
+      <div>
+        <p class="cmd">/stats <i>&lt;player_name&gt;</i></p>
+        <p class="desc">Shows statistics chart for a given player.</p>
+      </div>
+      <div>
+        <p class="cmd">/stats <i>&lt;player_name&gt;</i> <i>&lt;player_name2&gt;</i></p>
+        <p class="desc">Shows statistics chart comparing given players.</p>
+      </div>
     </div>
+    <div id="misc-commands">
+      <h3>Miscellaneous</h3>
+      <div>
+        <p class="cmd">/about</p>
+        <p class="desc">Shows information about BarcaBot.</p>
+      </div>
+      <div>
+        <p class="cmd">/invite</p>
+        <p class="desc">Shows an invite link for BarcaBot.</p>
+      </div>
+    </div>
+  </div>
 
-    <hr>
+  <hr>
 
-    <p><b>BarcaBot</b> by <a href="https://github.com/TraceLD/BarcaBot/graphs/contributors">TraceLD and
-            contributors</a>. The source code is licensed <a
-            href="https://github.com/TraceLD/BarcaBot/blob/master/LICENSE">AGPL-3.0</a>.</p>
+  <div id="open-source">
+    <h2>Open-source</h2>
+    <p>BarcaBot is, and forever will be, a fully open-source project. It is licensed under the <a
+        href="https://github.com/TraceLD/BarcaBot/blob/master/LICENSE">AGPL-3.0 License</a> and its source code is available at
+      <a href="https://github.com/TraceLD/BarcaBot">github.com/TraceLD/BarcaBot</a>.
+    </p>
+  </div>
+
+  <div id="data">
+    <h2>Data source</h2>
+    <p>All of the data BarcaBot uses comes from <a href="https://www.api-football.com/">API-FOOTBALL</a>.</p>
+  </div>
+
+  <hr>
+
+  <p><b>BarcaBot</b> by <a href="https://github.com/TraceLD/">TraceLD</a>. The source code is licensed <a
+      href="https://github.com/TraceLD/BarcaBot/blob/master/LICENSE">AGPL-3.0</a>.</p>
 </body>
 
 </html>

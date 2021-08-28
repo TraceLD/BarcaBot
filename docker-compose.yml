@@ -1,25 +1,14 @@
-version: '3'
+version: '2'
 
 services:
-    mongodb:
-        image: mongo:latest
-        env_file: ./db/db.env
-        ports:
-            - 27017:27017
-        volumes:
-            - ./db/init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
-            - mongodb-volume:/data/db
-    bot:
-        build:
-            context: ./src
-            dockerfile: ./BarcaBot/Dockerfile
-        ports:
-            - 5001:80
-        depends_on:
-            - mongodb
-        deploy:
-            restart_policy:
-                condition: on-failure
+  redis:
+    image: docker.io/bitnami/redis:6.2
+    env_file: ./env/redis.env
+    ports:
+      - '6379:6379'
+    volumes:
+      - 'redis_data:/bitnami/redis/data'
 
 volumes:
-    mongodb-volume:
+  redis_data:
+    driver: local
