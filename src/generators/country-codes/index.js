@@ -6,7 +6,7 @@ const indentation = "  ";
 let s = "export const countries: Map<string, string> = new Map<string, string>([\n";
 
 data.forEach((el) => {
-  s += `${indentation} [\"${el.name}\", \"${el.alpha.toLowerCase()}\"],\n`;
+  s += `${indentation}[\"${el.name}\", \"${el.alpha.toLowerCase()}\"],\n`;
 });
 
 s += "\n]);";
