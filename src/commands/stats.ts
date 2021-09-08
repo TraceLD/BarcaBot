@@ -37,7 +37,7 @@ const command: ISlashCommand = {
           `Could not find a FC Barcelona player with name \`${n}\`.`,
         );
 
-        i.reply({ embeds: [notFoundEmbed] });
+        await i.reply({ embeds: [notFoundEmbed] });
         return;
       }
 
